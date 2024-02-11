@@ -62,10 +62,65 @@ I/O size (minimum/optimal): 512 bytes / 512 bytes
 ```bash
 ansible-playbook setup_raid10_local.yml
 ```
-3. Results
 
+3. setup_raid10_local.yml
 
-![Verify RAID configuration](images/Array Status.png)
+```bash
+---
+- name: Configure RAID 10 Locally
+  hosts: localhost
+  become: true
+  gather_facts: no
+  tasks:
+    - name: Install mdadm
+      package:
+        name: mdadm
+        state: present
 
+    - name: Zero superblocks on all drives
+      command: mdadm --zero-superblock --force /dev/xvd{{ item }}
+      loop: ['b', 'c', 'd', 'f']
 
-![Check all RAID arrays.](images/Verify Raid.png)
+    - name: Create RAID 10 array
+      command: >
+        mdadm --create --verbose /dev/md0 --level=10 --raid-devices=4
+        /dev/xvdb /dev/xvdc /dev/xvdd /dev/xvdf
+
+    - name: Create filesystem on RAID array
+      filesystem:
+        fstype: ext4
+        dev: /dev/md0
+
+    - name: Ensure the RAID array is mounted
+      mount:
+        path: /mnt/raid10
+        src: "/dev/md0"
+        fstype: "ext4"
+        state: mounted
+
+    - name: Save RAID configuration
+      command: bash -c "mdadm --detail --scan >> /etc/mdadm.conf"
+
+    # Task to check all RAID arrays
+    - name: Verify RAID 10 setup
+      command: mdadm --detail /dev/md0
+      register: raid_detail
+
+    - name: Print RAID detail
+      debug:
+        msg: "{{ raid_detail.stdout_lines }}"
+
+    - name: Check All RAID Arrays
+      command: cat /proc/mdstat
+      register: raid_status
+
+    - name: Print RAID Arrays Status
+      debug:
+        msg: "{{ raid_status.stdout }}"
+``` 
+
+4. Results.
+
+![Verify RAID configuration](images/ArrayStatus.png)
+
+![Check all RAID arrays.](images/VerifyRaid.png)
