@@ -2,6 +2,25 @@
 
 ![AmazonEC2](images/amzonec2.png)        ![Ansible](images/ansiblelogo.png)             ![EBS](images/ebslogo.jpg)
 
+RAID 10, also known as RAID 1+0, is a hybrid RAID configuration that combines the features of RAID 1 (mirroring) and RAID 0 (striping). It provides a balance of redundancy, performance, and storage efficiency. Here's a breakdown of its key components and benefits:
+
+Components of RAID 10
+Mirroring (RAID 1): In mirroring, data is duplicated across two or more disks. This means every piece of data is written identically to two separate drives, ensuring that if one drive fails, a complete and immediate copy is available on the other, providing redundancy and improving data integrity.
+
+Striping (RAID 0): In striping, data is split into blocks and spread across two or more disks without parity (data redundancy). This improves performance because multiple disks can read and write data simultaneously, but it does not provide data protection on its own.
+
+How RAID 10 Works
+RAID 10 creates a striped set from a series of mirrored drives. In a four-disk RAID 10 setup, for example, two disks would form one mirrored pair where data is duplicated, and another two disks would form a second mirrored pair. The data is then striped across these pairs.
+This setup requires at least four disks to implement: two for the first mirrored pair and two for the second.
+Benefits of RAID 10
+High Performance: The striping aspect allows for faster data reads and writes, which is beneficial for applications requiring high disk performance.
+
+Data Redundancy: The mirroring component provides excellent data protection. If a disk in one of the mirrored pairs fails, the system can continue to operate using the other mirrored disk without any data loss.
+
+Improved Fault Tolerance: RAID 10 can sustain multiple simultaneous disk failures as long as no two failed disks are part of the same mirrored pair.
+
+Good for Databases: The combination of performance and redundancy makes RAID 10 an excellent choice for database servers and applications that require both speed and data integrity.
+
 ##### This playbook performs the following tasks:
 
 * Install mdadm: Installs the RAID management tool.
