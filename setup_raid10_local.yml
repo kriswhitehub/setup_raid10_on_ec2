@@ -33,7 +33,7 @@
     - name: Save RAID configuration
       command: bash -c "mdadm --detail --scan >> /etc/mdadm.conf"
 
-        # Task to check all RAID arrays
+    # Task to check all RAID arrays
     - name: Verify RAID 10 setup
       command: mdadm --detail /dev/md0
       register: raid_detail
