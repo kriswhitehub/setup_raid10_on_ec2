@@ -1,4 +1,7 @@
-## Setup Raid 10 on EC2 with ansible.
+## Configuring Raid 10 on EC2 EBS with Ansible.
+
+![AmazonEC2](images/amzonec2.png)        ![Ansible](images/ansiblelogo.png)             ![EBS](images/ebslogo.jpg)
+
 ##### This playbook performs the following tasks:
 
 * Install mdadm: Installs the RAID management tool.
