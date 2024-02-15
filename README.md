@@ -1,13 +1,13 @@
 ## Configuring Raid 10 on EC2 EBS with Ansible.
-### Raids
 
+![AmazonEC2](images/amzonec2.png)        ![Ansible](images/ansiblelogo.png)             ![EBS](images/ebslogo.jpg)
+
+### Raids
 1. RAID0 = Striping
 2. RAID1 = Mirroring
 3. RAID5 = Single Disk Distributed Parity
 4. RAID6 = Double Disk Distributed Parity
 5. RAID10 = Combine of Mirror & Stripe. (Nested RAID)
-
-![AmazonEC2](images/amzonec2.png)        ![Ansible](images/ansiblelogo.png)             ![EBS](images/ebslogo.jpg)
 
 RAID 10, also known as RAID 1+0, is a hybrid RAID configuration that combines the features of RAID 1 (mirroring) and RAID 0 (striping). It provides a balance of redundancy, performance, and storage efficiency. Here's a breakdown of its key components and benefits:
 
