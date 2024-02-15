@@ -1,4 +1,11 @@
 ## Configuring Raid 10 on EC2 EBS with Ansible.
+### Raids
+
+1. RAID0 = Striping
+2. RAID1 = Mirroring
+3. RAID5 = Single Disk Distributed Parity
+4. RAID6 = Double Disk Distributed Parity
+5. RAID10 = Combine of Mirror & Stripe. (Nested RAID)
 
 ![AmazonEC2](images/amzonec2.png)        ![Ansible](images/ansiblelogo.png)             ![EBS](images/ebslogo.jpg)
 
